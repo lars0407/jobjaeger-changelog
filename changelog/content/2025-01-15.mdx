@@ -1,0 +1,89 @@
+---
+title: "Release 2.0 - Komplette Überarbeitung von Jobjäger"
+description: "Major performance improvements, enhanced security features, and new developer tools"
+date: "2025-08-18"
+tags: ["Performance", "Security", "Developer Tools", "API"]
+version: "2.0"
+---
+
+![Performance Improvements](https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+
+- **Performance Boost**: 3x faster response times across all endpoints
+- **Enhanced Security**: New authentication system with OAuth 2.1 support
+- **Developer Experience**: Improved SDK with better TypeScript support
+- **API Enhancements**: New webhook system and real-time notifications
+
+## What's New
+
+This release focuses on making our platform faster, more secure, and easier to use for developers. We've completely rewritten our authentication system and optimized our backend for better performance.
+
+<Accordion type="multiple" collapsible="true" className="w-full not-prose">
+  <AccordionItem value="performance">
+    <AccordionTrigger>🚀 Performance Improvements</AccordionTrigger>
+    <AccordionContent className="flex flex-col gap-4 text-balance">
+      <ul className="list-disc space-y-2 pl-4">
+        <li>
+          <strong>3x faster API responses</strong> through optimized database queries
+        </li>
+        <li>Reduced memory usage by 40% in high-traffic scenarios</li>
+        <li>Improved caching layer with Redis cluster support</li>
+        <li>Optimized image processing pipeline</li>
+        <li>Better load balancing across multiple regions</li>
+      </ul>
+    </AccordionContent>
+  </AccordionItem>
+  
+  <AccordionItem value="security">
+    <AccordionTrigger>🔒 Security Enhancements</AccordionTrigger>
+    <AccordionContent className="flex flex-col gap-4 text-balance">
+      <ul className="list-disc space-y-2 pl-4">
+        <li>New OAuth 2.1 implementation with PKCE support</li>
+        <li>Enhanced rate limiting and DDoS protection</li>
+        <li>Improved audit logging for compliance requirements</li>
+        <li>Two-factor authentication for all admin accounts</li>
+        <li>Regular security scans and vulnerability assessments</li>
+      </ul>
+    </AccordionContent>
+  </AccordionItem>
+  
+  <AccordionItem value="developer">
+    <AccordionTrigger>🛠️ Developer Tools</AccordionTrigger>
+    <AccordionContent className="flex flex-col gap-4 text-balance">
+      <ul className="list-disc space-y-2 pl-4">
+        <li>Completely rewritten TypeScript SDK with full type coverage</li>
+        <li>New webhook system for real-time event notifications</li>
+        <li>Enhanced API documentation with interactive examples</li>
+        <li>Improved error handling and debugging information</li>
+        <li>New CLI tool for local development and testing</li>
+      </ul>
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+
+## Breaking Changes
+
+```typescript
+// Old authentication method (deprecated)
+const client = new Client({
+  apiKey: "your-api-key"
+})
+
+// New OAuth 2.1 method
+const client = new Client({
+  clientId: "your-client-id",
+  clientSecret: "your-client-secret",
+  redirectUri: "https://your-app.com/callback"
+})
+```
+
+
+
+## What's Next
+
+We're already working on the next major release which will include:
+- GraphQL API support
+- Advanced analytics dashboard
+- Machine learning-powered recommendations
+- Multi-language SDK support
+
+Stay tuned for more updates!
