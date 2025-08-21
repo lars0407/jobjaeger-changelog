@@ -6,6 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import { BeforeAfterSlider } from "@/components/before-after-slider"
 import { cn } from "@/lib/utils"
 
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
@@ -26,6 +27,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     AccordionItem,
     AccordionTrigger,
     AccordionContent,
+    BeforeAfterSlider,
     ...components,
   }
 }
