@@ -10,6 +10,7 @@ interface BeforeAfterSliderProps {
   afterAlt?: string
   className?: string
   height?: string
+  autoScroll?: boolean
 }
 
 export function BeforeAfterSlider({
@@ -18,10 +19,12 @@ export function BeforeAfterSlider({
   beforeAlt = "Vorher",
   afterAlt = "Nachher",
   className,
-  height = "h-96"
+  height = "h-96",
+  autoScroll = true
 }: BeforeAfterSliderProps) {
   const [sliderPosition, setSliderPosition] = useState(50)
   const [isDragging, setIsDragging] = useState(false)
+  const [hasAnimated, setHasAnimated] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
 
   const handleMouseDown = () => {
@@ -50,6 +53,58 @@ export function BeforeAfterSlider({
     const percentage = (x / rect.width) * 100
     setSliderPosition(Math.max(0, Math.min(100, percentage)))
   }
+
+  // Auto-scroll animation when component comes into viewport
+  useEffect(() => {
+    if (!autoScroll || hasAnimated) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasAnimated) {
+            // Start auto-scroll animation
+            setHasAnimated(true)
+            
+            // Animate to right (100%)
+            const animateRight = () => {
+              let position = 50
+              const interval = setInterval(() => {
+                position += 2
+                setSliderPosition(position)
+                if (position >= 100) {
+                  clearInterval(interval)
+                  // Animate back to center (50%)
+                  setTimeout(() => {
+                    const animateBack = () => {
+                      let backPosition = 100
+                      const backInterval = setInterval(() => {
+                        backPosition -= 2
+                        setSliderPosition(backPosition)
+                        if (backPosition <= 50) {
+                          clearInterval(backInterval)
+                          setSliderPosition(50)
+                        }
+                      }, 30)
+                    }
+                    animateBack()
+                  }, 1000) // Wait 1 second at right position
+                }
+              }, 30)
+            }
+            
+            animateRight()
+          }
+        })
+      },
+      { threshold: 0.3 } // Trigger when 30% of component is visible
+    )
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [autoScroll, hasAnimated])
 
   useEffect(() => {
     const handleGlobalMouseUp = () => {
@@ -108,10 +163,10 @@ export function BeforeAfterSlider({
 
         {/* Labels */}
         <div className="absolute top-4 left-4 bg-black/70 text-white px-3 py-1 rounded-md text-sm font-medium z-20">
-          Alte Version
+          Neue Version
         </div>
         <div className="absolute top-4 right-4 bg-black/70 text-white px-3 py-1 rounded-md text-sm font-medium z-20">
-          Neue Version
+          Alte Version
         </div>
 
         {/* Instructions */}
