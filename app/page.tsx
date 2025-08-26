@@ -39,7 +39,7 @@ export default function HomePage() {
       <div className="border-b border-border/50">
         <div className="max-w-5xl mx-auto relative">
           <div className="p-3 flex items-center justify-between">
-            <h1 className="text-3xl font-semibold tracking-tight">Changelog</h1>
+            <h1 className="text-3xl font-semibold tracking-tight">Updates</h1>
             <ThemeToggle />
           </div>
         </div>
